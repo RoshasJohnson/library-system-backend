@@ -30,8 +30,6 @@ def get_books(request):
 
 
 
-
-
 # creating a new book record
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
