@@ -77,17 +77,21 @@ class BookDetail(APIView):
         
 
 class AuthorList(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
     """
     list all authors and create a new author
     """
-    permission_classes = (permissions.IsAuthenticated,)
     def get(self, request):
+        print("fetching all authors")
         authors = Author.objects.all()
         serializer = AuthorSerializer(authors, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        print(request.data)
+        
         serializer = AuthorSerializer(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -95,14 +99,12 @@ class AuthorList(APIView):
 
 
 
-
+  
 class GenreList(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
     """
     list all genres and create a new genre
     """
-
-
-    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request):
         genres = Genre.objects.all()

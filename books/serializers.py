@@ -1,32 +1,34 @@
 from rest_framework import serializers
-from.models import  Book   , Author , Genre
+from.models import Book, Author, Genre
 
 
-class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('url', 'first_name', 'last_name', 'pen_name')
+        fields = "__all__"
 
+        
 
 
 class GenreSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Genre
-            fields = ('id', 'name')
+    class Meta:
+        model = Genre
+        fields = "__all__"
+
+
+
 
 class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-       
-        fields =  "__all__"
 
-
+        fields = "__all__"
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Book
         depth = 1

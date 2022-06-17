@@ -6,16 +6,11 @@ from django.db import models
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    pen_name = models.CharField(max_length=100, null=True, blank=True, help_text="Enter the author's pen name if they have one")
-    date_of_birth = models.DateField()
-    date_of_death = models.DateField()
+    pen_name = models.CharField(max_length=100, help_text="Enter the author's pen name if they have one")
 
-    class Meta:
-        ordering = ['first_name']
-
+   
     def __str__(self):
         return  f"{self.first_name} {self.last_name}"
-
 
     def save(self, *args, **kwargs):
         """
@@ -26,7 +21,7 @@ class Author(models.Model):
         if self.pen_name:
             self.pen_name = self.pen_name.title()
 
-        super(Author, self).save(*args, **kwargs)
+        super(Author, self).save()
 
 
 class Genre(models.Model):
@@ -37,12 +32,9 @@ class Genre(models.Model):
         max_length=200, help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)")
 
     def __str__(self):
-        """
-        String for representing the Model object.
-        """
-        return self.name
-
-    def save(self):
+        return f"{self.name}"
+  
+    def save(self,*args, **kwargs):
         self.name = self.name.title()
         return super(Genre, self).save()
 
