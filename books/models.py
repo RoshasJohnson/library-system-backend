@@ -29,29 +29,6 @@ class Author(models.Model):
         super(Author, self).save(*args, **kwargs)
 
 
-class Book(models.Model):
-
-    """
-    Model representing a book .
-    """
-
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
-    year_published = models.IntegerField(null=True, blank=True)
-
-    class Meta:
-        ordering = ['title']
-
-    def __str__(self):
-        return f"{self.title} - {self.author}"
-
-    def save(self):
-        self.title = self.title.title()
-        return super(Book, self).save()
-
-
 class Genre(models.Model):
     """
     Model representing a book genre.
@@ -68,3 +45,22 @@ class Genre(models.Model):
     def save(self):
         self.name = self.name.title()
         return super(Genre, self).save()
+
+class Book(models.Model):
+
+    """
+    Model representing a book .
+    """
+
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    year_published = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return f"{self.title} - {self.author}"
+

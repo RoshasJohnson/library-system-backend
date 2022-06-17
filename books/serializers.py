@@ -9,17 +9,25 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'first_name', 'last_name', 'pen_name')
 
 
-class BookSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Book
-        depth = 1
-        fields = ('id', 'title', 'description', 'author', 'genre')
-
-
-
 
 class GenreSerializer(serializers.ModelSerializer):
         class Meta:
             model = Genre
             fields = ('id', 'name')
+
+class BookSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Book
+       
+        fields =  "__all__"
+
+
+
+
+class BookDetailSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Book
+        depth = 1
+        fields = "__all__"
