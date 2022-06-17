@@ -14,6 +14,9 @@ Reactjs code : https://github.com/RoshasJohnson/library-system-front-end
 `cd library-system-backend`  </br>
 # Note: private info are added in .env file so create new .env file in root add them there
 
+`python manage.py makemigrations` </br>
+`python manage.py migrate`    </br> 
+
 `python manage.py runserver`  </br>
 
 
